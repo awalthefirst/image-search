@@ -1,5 +1,54 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container
+    h1 FreeCodeCamp Image Search Abstraction Layer Api 
+    h3 Usage: 
+    
+    pre
+      h4(style="color: #a94442") Endpoint:  http://fcc-imagesearch.herokuapp.com/search *parameters
+      h4 GET http://fcc-imagesearch.herokuapp.com/search?q=cats&offset=10
+      h4 parameters 
+      p 
+        code 1. q = search query // optional defaults to cats
+      p 
+        code 2. offset = number // number of results, optional defaults to 10: max 10, min 1
+    pre.alert.alert-success
+      h4 Response
+      p.
+        [
+          {
+          "text": "Black cats can be adopted",
+          "url": "http://media.gettyimages.com/photos/cat103006toronto-ont-the-humane-society-protects-black-cats-for-a-picture-id165456851",
+          "content": "http://www.gettyimages.com/detail/news-photo/austro-hungarian-american-actor-peter-lorre-and-american-news-photo/164327183"
+          },
+          {
+          "text": "British Shorthair cats look on",
+          "url": "http://media.gettyimages.com/photos/british-shorthair-cats-look-on-during-a-cat-exhibition-in-bishkek-on-picture-id470350124",
+          "content": "http://www.gettyimages.com/detail/news-photo/british-shorthair-cats-look-on-during-a-cat-exhibition-in-news-photo/470350124"
+          }
+          ... 
+        ] // 10 elements
+      | 
+      pre.alert.alert-danger
+        h4 Error
+        h4 Response
+        | []  // empty array
+     
+    pre
+      h4(style="color: #a94442") Endpoint: http://fcc-imagesearch.herokuapp.com/recent
+      h4 GET http://fcc-imagesearch.herokuapp.com/recent //get recent searched queries
+      pre.alert.alert-success
+        h4 Response
+        p.
+          [
+            {
+            "search": "cats",
+            "time": "183"
+            },
+            {
+            "search": "funny cats",
+            "time": "sfd"
+            }
+            ... 
+          ] // maximum 10 elements
