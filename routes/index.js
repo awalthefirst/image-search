@@ -21,7 +21,6 @@ router.get('/search', function (req, res, next) {
   var url = "https://www.googleapis.com/customsearch/v1?searchType=image&key=" + process.env.SearchApi +
     "&cx=" + process.env.SearchEngine + "&q=" + querySearch + '&num=' + limit;
 
-
   request(url, function (error, response, body) {
     
     if (!error && response.statusCode == 200) {
@@ -37,9 +36,11 @@ router.get('/search', function (req, res, next) {
       });
 
       res.json(final);
-
       recent()
+    }else{
+      res.json([]); 
     }
+    
   });
 
 
@@ -47,14 +48,13 @@ router.get('/search', function (req, res, next) {
 
     RecentDb.addRecent({
       search: querySearch,
-      time: new Date().toDateString()
+      time: new Date().toLocaleString()
     })
   }
 
 });
 
 router.get('/recent', function (req, res, next) {
-
   RecentDb.getRecent(function (err, data) {
     if (err) {
       res.json([]);
